@@ -40,12 +40,14 @@ module Geocoder
     OPTIONS = [
       :timeout,
       :lookup,
+      :ip_lookup,
       :language,
       :http_headers,
       :use_https,
       :http_proxy,
       :https_proxy,
       :api_key,
+      :ip_api_key,
       :cache,
       :cache_prefix,
       :always_raise,
@@ -60,16 +62,18 @@ module Geocoder
     end
 
     def set_defaults
-      @timeout      = 3           # geocoding service timeout (secs)
-      @lookup       = :google     # name of geocoding service (symbol)
-      @language     = :en         # ISO-639 language code
-      @http_headers = {}          # HTTP headers for lookup
-      @use_https    = false       # use HTTPS for lookup requests? (if supported)
-      @http_proxy   = nil         # HTTP proxy server (user:pass@host:port)
-      @https_proxy  = nil         # HTTPS proxy server (user:pass@host:port)
-      @api_key      = nil         # API key for geocoding service
-      @cache        = nil         # cache object (must respond to #[], #[]=, and #keys)
-      @cache_prefix = "geocoder:" # prefix (string) to use for all cache keys
+      @timeout        = 3           # geocoding service timeout (secs)
+      @lookup         = :google     # name of geocoding service (symbol)
+      @ip_lookup      = :freegeoip  # name of the ip geocoding service (symbol)
+      @language       = :en         # ISO-639 language code
+      @http_headers   = {}          # HTTP headers for lookup
+      @use_https      = false       # use HTTPS for lookup requests? (if supported)
+      @http_proxy     = nil         # HTTP proxy server (user:pass@host:port)
+      @https_proxy    = nil         # HTTPS proxy server (user:pass@host:port)
+      @api_key        = nil         # API key for geocoding service
+      @ip_api_key     = nil         # API key for ip geocoding service
+      @cache          = nil         # cache object (must respond to #[], #[]=, and #keys)
+      @cache_prefix   = "geocoder:" # prefix (string) to use for all cache keys
 
       # exceptions that should not be rescued by default
       # (if you want to implement custom error handling);
