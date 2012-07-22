@@ -42,10 +42,7 @@ module Geocoder::Lookup
     end
 
     def query_url(query, reverse = false)
-      query_url = "#{protocol}://geoip.maxmind.com/e?l=#{Geocoder::Configuration.ip_api_key}&i=#{query}"
-      puts "query_url: #{query_url}"
-      
-      return query_url
+      "#{protocol}://geoip.maxmind.com/e?l=#{Geocoder::Configuration.ip_api_key}&i=#{query}"
     end
   end
 end
