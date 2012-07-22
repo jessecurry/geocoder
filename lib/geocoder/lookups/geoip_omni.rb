@@ -6,8 +6,13 @@ module Geocoder::Lookup
 
     private # ---------------------------------------------------------------
 
+    ##
+    # Parses a raw search result (returns hash or array).
+    #
     def parse_raw_data(raw_data)
-      raw_data.match(/^<html><title>404/) ? nil : super(raw_data)
+      raw_data.split ','
+    rescue
+      warn "Geocoding API's response was not valid."
     end
 
     def results(query, reverse = false)
@@ -37,7 +42,10 @@ module Geocoder::Lookup
     end
 
     def query_url(query, reverse = false)
-      "http://geoip.maxmind.com/e?l=#{Geocoder::Configuration.api_key}&i=#{query}"
+      query_url = "#{protocol}://geoip.maxmind.com/e?l=#{Geocoder::Configuration.ip_api_key}&i=#{query}"
+      puts "query_url: #{query_url}"
+      
+      return query_url
     end
   end
 end
